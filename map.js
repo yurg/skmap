@@ -1,4 +1,10 @@
   var skmap = L.map('mapid').setView([48.730477, 19.704924], 8.4);
+
+  var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+  var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 18, attribution: osmAttrib}); 
+  skmap.addLayer(osm);
+  /*
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       maxZoom: 18,
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <br>' +
@@ -6,7 +12,7 @@
           'Imagery © <a href="http://mapbox.com">Mapbox</a>',
       id: 'mapbox.streets'
   }).addTo(skmap);
-
+*/
 
   /*###Add geojson######*/
 
@@ -46,7 +52,7 @@
   omnivore.kml('rekreacne.kml')
       .on('ready', function(layer) {
           
-          
+
           this.eachLayer(function(layer) {
 
 
