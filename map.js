@@ -5,6 +5,12 @@
   var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 18, attribution: osmAttrib}); 
   skmap.addLayer(osm);
  
+googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+    maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3']
+});
+skmap.addLayer(googleStreets);
+
  /*
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       maxZoom: 18,
@@ -104,3 +110,19 @@ function getSkiMarker(feature, latlng) {
 function getPopup(feature, layer) {
       layer.bindPopup(layer.feature.properties.name + "<br>" + layer.feature.properties.description);
 }
+
+var maptypes = L.layerGroup([googleStreets, osm]);
+var infotypes = L.layerGroup([spa, ski, geojsonLayer]);
+
+var baseMaps = {
+    "Google": googleStreets,
+    "OSM": osm
+};
+
+var overlayMaps = {
+    "Spa": spa,
+    "Ski": ski,
+    "R": geojsonLayer
+};
+
+L.control.layers(baseMaps, overlayMaps).addTo(skmap);
